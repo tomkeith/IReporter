@@ -1,13 +1,15 @@
 .row{
-	width: 100%;
+	width: 90%;
 	height: relative;
-	overflow:auto;
+    overflow:auto;
+    margin-left: 160px;
+    position: fixed;
 }
 
 .row-column-bg{
 	width: 250px;
 	padding: 10px;
-	border: 2px solid red;
+	border: 1px solid black;
     border-radius: 5px;
 	height: 565px;
     position: absolute;
@@ -17,16 +19,17 @@
 	width: 300px;
 	padding: 10px;
 	height: 565px;
-	float: right;
-	border: 2px solid red;
+    float: right;
+    margin-left: 10%;
+	border: 1px solid black;
     border-radius: 8px;
 }
 
 .row-middle{
 	width: 640px;
 	padding: 10px;
-	margin-left: 290px;
-	border: 2px solid red;
+	margin-left: 270px;
+	border: 1px solid black;
     border-radius: 5px;
     position: absolute; 
 	height: 565px;
