@@ -8,6 +8,7 @@
         <link rel="shortcut icon" href="../favicon.ico"> 
         <link rel="stylesheet" type="text/css" href="css/style.css" />
         <link rel="stylesheet" type="text/css" href="css/style2.css" />
+       
     </head>
     <body>
 		<header id="header">
@@ -19,7 +20,6 @@
 	            <ul>
 					  <li><a href="post_redflag.html">Create Red flag</a></li>
                       <li><a href="account.html">Profile</a></li>
-					  <li><a href="#">Admin</a></li>
                       <li><a href="index.html">Sign Out</a></li>
 				</ul>
 			</nav>
@@ -72,15 +72,15 @@
                           <label for="fname"> Title: </label>
                         </div>
                         <div class="col-75">
-                          <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                          <input type="text" id="title" name="title" placeholder="Title..">
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-25">
-                          <label for="lname">Last Name</label>
+                          <label for="fullname">Full Name</label>
                         </div>
                         <div class="col-75">
-                          <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                          <input type="text" id="fullname" name="fulname" placeholder="Your full name..">
                         </div>
                       </div>
                       <div class="row">
@@ -91,6 +91,56 @@
                           <textarea id="subject" name="subject" placeholder="Write something.." style="height:100px"></textarea>
                         </div>
                       </div>
+                      <div class="row">
+                          <div class="col-25">
+                            <label for="subject">Location</label>
+                          </div>
+                          <div class="col-75">
+                              <script src="http://maps.google.com/maps/api/js?sensor=false">
+                              </script>
+                      <script type="text/javascript">
+                        function showPosition(){
+                            if(navigator.geolocation){
+                                navigator.geolocation.getCurrentPosition(function(position){
+                                    var positionInfo = "Your current position is (" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " + position.coords.longitude + ")";
+                                    var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+positionInfo+"&zoom=14&size=400x300&sensor=false&key=YOUR_:KEY";
+                                    document.getElementById("result").innerHTML = "<img src='"+img_url+"'>" + positionInfo;
+                                });
+                            } else{
+                                alert("Sorry, your browser does not support HTML5 geolocation.");
+                            }
+                        }
+                        function appendLocation(position){
+                          field.innerHTML = "Lat: " + position.coords.latitude + "Long: " + position.coords.latitude;
+                      }
+                      
+                      function handleError(error){
+                          switch(error.code){
+                              case error.PERMISSION_DENIED:
+                                  field.innerHTML = "Please allow your browser to access location";
+                                  break;
+                              case error.POSITION_UNAVAILABLE:
+                                  field.innerHTML = "Location Info not available";
+                                  break;
+                              case error.TIMEOUT:
+                                  field.innerHTML = "Your request timed out, please retry";
+                                  break;
+                              case error.UNKNOWN_ERROR:
+                                  field.innerHTML = "Sorry, unknown error occured !";
+                          }
+                          
+                      }
+                    </script>
+                    
+                    <body>
+                        <div id="result">
+                            <!--Position information will be inserted here-->
+                        </div>
+                        <button type="button" onclick="showPosition();">Show Position</button>
+                        
+                      </div>
+                    </div>
+                  
                       <div class="row">
                         <div class="col-25">
                           <label for="lname">Image Caption</label>
@@ -107,6 +157,7 @@
                           <input type="url" id="lname" name="lastname" placeholder="url.">
                         </div>
                       </div>
+                      <br>
                       <div class="row">
                         <input type="submit" value="Submit">
                       </div>
@@ -123,6 +174,10 @@
                       <p>Email: tom@tom.com</p>
                       <p>Phone: +254790463533</p>
                       <P>Addres: Nairobi</P>
+                      <br>
+                      <div class="row">
+                        <input type="submit" value="Edit">
+                      </div>
                   </div>
                   <!-- Start of top row div widget  -->
                </div>  
