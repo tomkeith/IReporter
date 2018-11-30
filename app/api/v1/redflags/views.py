@@ -61,21 +61,5 @@ class RedFlag(Resource, RedFlagsModels):
 		editlocation = self.model.edit_location(num)
 		return editlocation
 
-	def delete(self, num):
-		resp = self.model.destroy(num)
-
-		return make_response(jsonify(
-			{
-			"data" : resp,
-			"status" : 204
-			}), 204)
-		
-	def put(self, num):
-		resp = self.model.put_one(num)
-
-		return make_response(jsonify(
-			{
-			"data" : resp,
-			"status" : 200
-			}), 200)
+	
 

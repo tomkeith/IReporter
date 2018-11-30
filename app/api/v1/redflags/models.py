@@ -97,20 +97,5 @@ class RedFlagsModels():
 			else:
 				return "No content found"
 
-	def put_one(self, num):
-		for redflag in self.db:
-			if redflag['id'] == num:
-				return redflag
-			else:
-				return "No content found"
-
-	def destroy(self, num):
-		for redflag in redflags:
-			if redflag['id'] == num:
-				redflags.pop(num - 1)
-				return "Deleted successfully"
-			else:
-				return "No content found"
-
 	
 		
