@@ -36,30 +36,6 @@ class RedFlags(Resource, RedFlagsModels):
 
 	
 
-class RedFlag(Resource, RedFlagsModels):
-	"""docstring for RedFlag"""
-	def __init__(self):
-		self.model = RedFlagsModels()
-
-	def get(self, num):
-		resp = self.model.get_one(num)
-
-		return make_response(jsonify(
-			{
-			"data" : resp,
-			"status" : 201
-			}), 201)
-
-	def patch(self, num):
-		try:
-			int(num)
-		except ValueError:
-			return{
-				'status': 404,
-				'error': 'Valid id required'
-			}
-		editlocation = self.model.edit_location(num)
-		return editlocation
 
 	
 
