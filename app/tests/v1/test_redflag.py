@@ -15,7 +15,7 @@ class TestRedFlags(BaseTestRedFlags):
 		response = self.client.post('/api/v1/redflags', data=json.dumps(self.data), content_type='application/json')
 		self.assertEqual(response.status_code, 201)
 		result = json.loads(response.data)
-		self.assertEqual(response.data)
+		
 
 	def test_redflag_patch(self):
 		response = self.client.patch('/api/v1/redflags/1', data=json.dumps(self.data2), content_type='application/json')
