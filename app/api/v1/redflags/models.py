@@ -25,9 +25,14 @@ class RedFlagsModels():
 				return redflag
 		return None
 
+	def redflagid(self):
+		if len(self.db):
+			return self.db[-1]["id"] + 1
+		return 1
+
 	def save_record(self, createdBy, location, comment):
 		payload = {
-		  'id' : len(self.db)+1,
+		  'id' : self.redflagid(),
 		  'createdOn' : datetime.datetime.now().strftime('%I:%M%p %B %d, %Y'),  
 		  'createdBy' : createdBy, 
 		  'type' : "redflag",       
