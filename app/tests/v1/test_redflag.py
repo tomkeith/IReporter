@@ -1,81 +1,39 @@
-from ... import create_app
 import unittest
 import json
+from app.tests.v1.base import BaseTestRedFlags
+from app.api.v1.redflags.models import redflags
 
 
-app = create_app()
-
-class TestRedFlags(unittest.TestCase):
-
-	def setUp(self):
-		app.testing = True 
-		self.app = app.test_client()
-		self.data = {
-			  "createdBy" : "Tom",
-			  "location" : "45E, 24N",
-			  "status" : "draft", 
-			  "Images" : "image", 
-			  "Videos" : "video",
-			  "comment" : "whosmatternow"
-			}
+class TestRedFlags(BaseTestRedFlags):
+		
 	
 	def test_redflag_get(self):
-		response = self.app.get('/api/v1/redflags')
+		response = self.client.get('/api/v1/redflags')
 		self.assertEqual(response.status_code, 200)
 
 	def test_redflag_post(self):
-		response = self.app.post('/api/v1/redflags', data=json.dumps(self.data), content_type='application/json')
+		response = self.client.post('/api/v1/redflags', data=json.dumps(self.data), content_type='application/json')
 		self.assertEqual(response.status_code, 201)
+		result = json.loads(response.data)
+		
 
 	def test_redflag_patch(self):
-		self.data2 = {
-			  "createdBy" : "mwaka", 
-			  "location" : "45E, 29N",
-			  "status" : "draft", 
-			  "Images" : "image", 
-			  "Videos" : "video",
-			  "comment" : "whosmatternow"
-			}
-		response = self.app.patch('/api/v1/redflag/1', data=json.dumps(self.data2), content_type='application/json')
+		response = self.client.patch('/api/v1/redflags/1', data=json.dumps(self.data2), content_type='application/json')
 		self.assertEqual(response.status_code, 200)
 
 	def test_redflag_delete(self):
-		self.data2 = {
-			  "createdBy" : "mwaka",
-			  "location" : "45E, 29N",
-			  "status" : "draft", 
-			  "Images" : "image", 
-			  "Videos" : "video",
-			  "comment" : "whosmatternow"
-			}
-		response = self.app.delete('/api/v1/redflag/1', data=json.dumps(self.data2), content_type='application/json')
-		self.assertEqual(response.status_code, 204)
+		response = self.client.delete('/api/v1/redflags/1', content_type='application/json')
+		self.assertEqual(response.status_code, 200)
 		
 
 	def test_redflag_get(self):
-		self.data1 = {
-			  "createdBy" : "Abram",
-			  "location" : "5E, 9N",
-			  "status" : "draft", 
-			  "Images" : "image", 
-			  "Videos" : "video",
-			  "comment" : "whosmatternow"
-			}
-		response = self.app.get('/api/v1/redflag/1', data=json.dumps(self.data1), content_type='application/json')
+		response = self.client.get('/api/v1/redflags/1', data=json.dumps(self.data1), content_type='application/json')
 		self.assertEqual(response.status_code, 201)
 
 
 
 	def test_redflag_put(self):
-		self.data1 = {
-			  "createdBy" : "Abram",
-			  "location" : "5E, 9N",
-			  "status" : "draft", 
-			  "Images" : "image", 
-			  "Videos" : "video",
-			  "comment" : "whosmatternow"
-			}
-		response = self.app.put('/api/v1/redflag/1', data=json.dumps(self.data1), content_type='application/json')
+		response = self.client.put('/api/v1/redflags/1', data=json.dumps(self.data1), content_type='application/json')
 		self.assertEqual(response.status_code, 200)
 
 

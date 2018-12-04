@@ -21,7 +21,7 @@ class RedFlags(Resource, RedFlagsModels):
 
 		return make_response(jsonify(
 			{
-			"data" : resp,
+			"Message" : "RedFlag has been created",
 			"status" : 201
 			}), 201)
 
@@ -30,7 +30,7 @@ class RedFlags(Resource, RedFlagsModels):
 
 		return make_response(jsonify(
 			{
-			"data" : resp,
+			"RedFlag" : resp,
 			"status" : 200
 			}), 200)
 
@@ -39,14 +39,14 @@ class RedFlags(Resource, RedFlagsModels):
 class RedFlag(Resource, RedFlagsModels):
 	"""docstring for RedFlag"""
 	def __init__(self):
-		self.model = RedFlagsModels()
+		self.db = RedFlagsModels()
 
 	def get(self, num):
-		resp = self.model.get_one(num)
+		resp = self.db.get_one(num)
 
 		return make_response(jsonify(
 			{
-			"data" : resp,
+			"RedFlag" : resp,
 			"status" : 201
 			}), 201)
 
@@ -58,24 +58,46 @@ class RedFlag(Resource, RedFlagsModels):
 				'status': 404,
 				'error': 'Valid id required'
 			}
-		editlocation = self.model.edit_location(num)
+		editlocation = self.db.edit_location(num)
 		return editlocation
 
-	def delete(self, num):
-		resp = self.model.destroy(num)
+	def patch(self, num):
+		try:
+			int(num)
+		except ValueError:
+			return{
+				'status': 404,
+				'error': 'Valid id required'
+			}
+		editcomment = self.db.edit_comment(num)
+		return editcomment
 
+	def delete(self, num):
+		redflag = self.db.search(num)
+		if redflag == None:
+			return make_response(jsonify(
+			{
+			"RedFlag" : "RedFlag does not exist.",
+			"status" : 404
+			}), 404)
+		self.db.destroy(redflag)
+		success_message = {
+			"id" : num,
+			"message" : "RedFlag deleted successfully"
+		}
 		return make_response(jsonify(
 			{
-			"data" : resp,
-			"status" : 204
-			}), 204)
+			"RedFlag" : success_message,
+			"status" : 200
+			}),)
+
 		
 	def put(self, num):
-		resp = self.model.put_one(num)
+		resp = self.db.put_one(num)
 
 		return make_response(jsonify(
 			{
-			"data" : resp,
+			"RedFlag" : resp,
 			"status" : 200
 			}), 200)
 

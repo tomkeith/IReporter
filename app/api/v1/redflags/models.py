@@ -4,13 +4,26 @@ import datetime
 
 
 
-redflags = []
+redflags = [ {"id" : 1,
+				"createdBy" : "Tom",
+			  "location" : "45E, 24N",
+			  "status" : "draft", 
+			  "Images" : "image", 
+			  "Videos" : "video",
+			  "comment" : "whosmatternow"}]
 
 class RedFlagsModels():
 	"""docstring for RedFlagsModels"""
 	def __init__(self):
 		self.db = redflags
 
+
+	def search(self, num):
+
+		for redflag in self.db:
+			if redflag["id"] == num:
+				return redflag
+		return None
 
 	def save_record(self, createdBy, location, comment):
 		payload = {
@@ -94,23 +107,21 @@ class RedFlagsModels():
 		for redflag in self.db:
 			if redflag['id'] == num:
 				return redflag
-			else:
-				return "No content found"
+		return "No redflag content found by that id"
 
 	def put_one(self, num):
 		for redflag in self.db:
 			if redflag['id'] == num:
 				return redflag
-			else:
-				return "No content found"
+		return "No redflag content found by that id"
 
-	def destroy(self, num):
-		for redflag in redflags:
-			if redflag['id'] == num:
-				redflags.pop(num - 1)
-				return "Deleted successfully"
-			else:
-				return "No content found"
+	def destroy(self, redflag):
+		self.db.remove(redflag)
+				
+
+
+			
+		
 
 	
 		

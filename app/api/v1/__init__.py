@@ -11,4 +11,4 @@ api = Api(api_version_one)
 
 api.add_resource(RedFlags, "/redflags")
 api.add_resource(Users, "/users")
-api.add_resource(RedFlag, "/redflag/<int:num>")
+api.add_resource(RedFlag, "/redflags/<int:num>")
